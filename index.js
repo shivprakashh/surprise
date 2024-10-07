@@ -60,7 +60,7 @@ app.get("/myview",(req,resp)=>{
 app.post("/password",(req,resp)=>{
 
 if(req.body.email){
-    const right = "thetnaing1";
+    const right = "diyalu()()";
     const value = req.body.email;
     if(value === right){
         resp.send({message:"thet54321()()"});
