@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<style>
+    body,html{
+        width:100%;
+        height:100%;
+        padding:0px;
+        margin:0px;
+
+    }
+    #con{
+        width:100vw;
+        height:auto;
+        padding:10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+    }
+    video{
+        width:200px;
+        height:auto;
+        transform: scaleX(-1);
+        
+    }
+    .eachcon{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: beige;
+        margin-left: 10px;
+    }
+    .delete{
+        background-color: red;
+        padding:7px 14px;
+        color:white;
+
+    }
+</style>
+<body>
+    <div id="con">
+    
+    </div>
+    <script>
+        const con = document.getElementById("con")
+        window.addEventListener("load",async ()=>{
+            const url = "https://localhost:4200/namelist";
+ 
+
+try {
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data, "This is the response data");
+
+     // Make sure this exists in your HTML
+    data.forEach(videoFile => {
+        const htm = `<a href="https://localhost:4200/uploads/${videoFile}" download>
+            <video  controls>
+                <source src="https://localhost:4200/uploads/${videoFile}" type="video/webm">
+                <source src="https://localhost:4200/uploads/${videoFile}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </a>
+        <button  onclick="deletevideo('${videoFile}')">Delete</button>
+        `
+        
+        ;
+        const child = document.createElement("div");
+        child.id = id=videoFile;
+        child.innerHTML = htm;
+        child.classList.add("eachcon")
+        con.appendChild(child);
+    });
+
+} catch (error) {
+    console.error("Fetch error:", error);
+    alert(error)
+}
+
+        })
+        function deletevideo(filename) {
+            console.log("enter")
+    const url = "https://localhost:4200/delete"; // Replace with your local IP address
+
+    
+
+
+fetch(url, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ filename: filename }), // Send the filename as JSON
+})
+.then(response => {
+    // Check if the response is okay (status in the range 200-299)
+    if (!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    return response.json(); // Parse JSON response
+})
+.then(data => {
+    console.log(data); // Log the success response
+
+    // Optionally, you can remove the video element from the DOM
+    let videoElement = document.getElementById(filename);
+    if (videoElement) {
+        videoElement.remove(); // Remove the video element from the page
+    }
+})
+.catch(error => {
+    console.error("Error deleting file:", error); // Log the error for debugging
+    alert("Error deleting file: " + error.message); // Show an error message
+});
+
+}
+
+
+    </script>
+</body>
+</html>
