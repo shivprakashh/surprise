@@ -62,6 +62,7 @@ app.post("/password",(req,resp)=>{
 if(req.body.email){
     const right = "diyalu()()";
     const value = req.body.email;
+    console.log(req.body.email,"thisis what enterd passwrod.")
     if(value === right){
         resp.send({message:"thet54321()()"});
     }else{
