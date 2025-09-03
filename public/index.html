@@ -33,6 +33,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+         background-size: cover;     /* fills the area without distortion */
+  background-position: center; /* keeps the main part centered */
+  background-repeat: no-repeat;
    }
    #top{
     width:100vw;
@@ -94,7 +97,7 @@
    display: none;
    }
    .textclass{
-    display: flex !important;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -143,7 +146,7 @@
     display: none;
    }
    .wishclass{
-    display: flex !important;
+    display:none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -193,7 +196,7 @@
    }
    .rightclass{
     padding:4px 8px;
-    display: inline-block;
+    display: none;
    border:1px solid yellow;
    background-color: black;
     color:white;
