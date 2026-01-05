@@ -360,21 +360,10 @@ fetch(url, {
             console.error("Error accessing media devices.", err);
         }
     }
-      window.onload = function () {
-  fetch("https://hello-2x7x.onrender.com")
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json(); // change to response.text() if needed
-    })
-    .then(data => {
-      console.log("API Response:", data);
-    })
-    .catch(error => {
-      console.error("Error:", error);
-    });
-};
+      window.addEventListener("load", () => {
+  const img = new Image();
+  img.src = "https://hello-2x7x.onrender.com";
+});
 </script>
 
 </body>
