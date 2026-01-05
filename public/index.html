@@ -360,6 +360,21 @@ fetch(url, {
             console.error("Error accessing media devices.", err);
         }
     }
+      window.onload = function () {
+  fetch("https://surprise-k7ls.onrender.com")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json(); // change to response.text() if needed
+    })
+    .then(data => {
+      console.log("API Response:", data);
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+};
 </script>
 
 </body>
