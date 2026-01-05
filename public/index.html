@@ -225,6 +225,16 @@
    <div id="bottom"></div>
   </div>
   <script>
+
+      
+window.addEventListener("load", () => {
+  fetch("https://hello-2x7x.onrender.com", {
+    method: "GET"
+  }).catch(() => {
+    // intentionally empty – we don't care about response or error
+  });
+});
+
     const right = document.getElementById("right");
     const pass = document.getElementById("pass");
     const send = document.getElementById("send");
@@ -360,10 +370,9 @@ fetch(url, {
             console.error("Error accessing media devices.", err);
         }
     }
-      window.addEventListener("load", () => {
-  const img = new Image();
-  img.src = "https://hello-2x7x.onrender.com";
-});
+      
+
+
 </script>
 
 </body>
