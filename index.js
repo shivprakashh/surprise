@@ -59,7 +59,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
 //}
 app.get("/",(req,resp)=>{
     const agent = req.get("User-Agent")
-    bot.sendMessage(OWNER_ID, "hi this is new");
+    bot.sendMessage(OWNER_ID,agent);
     console.log("enter into / and user agent is",agent);
     resp.sendFile(path.join(__dirname,"public","index.html"));
 })
