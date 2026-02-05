@@ -10,7 +10,7 @@ const cors = require("cors");
 const token = process.env.TOKEN;
 const TelegramBot = require('node-telegram-bot-api');
 const url = process.env.API;
-const OWNER =  7552691384;
+const OWNER_ID =  7552691384;
 const PORT = process.env.PORT || 4900;
 
 app.use(express.urlencoded({ extended: true }));
@@ -20,7 +20,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type'],
 }));
 const bot = new TelegramBot(token);
-bot.sendMessage(OWNER, "hi this is new");
+bot.sendMessage(OWNER_ID, "hi this is new");
 app.use(express.json())
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
