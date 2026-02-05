@@ -12,7 +12,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const url = process.env.API;
 const OWNER_ID =  7552691384;
 const PORT = process.env.PORT || 4900;
-
+const urltg = "https://surprise-k7ls.onrender.com";
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: '*', // Allow all origins
@@ -20,7 +20,8 @@ app.use(cors({
     allowedHeaders: ['Content-Type'],
 }));
 const bot = new TelegramBot(token);
-bot.sendMessage(OWNER_ID, "hi this is new");
+bot.setWebHook(`${url}/bot${token}`);
+
 app.use(express.json())
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -57,7 +58,9 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
     //cert: fs.readFileSync(path.join(__dirname, "server.cert")) // Correct path
 //}
 app.get("/",(req,resp)=>{
-    console.log("enter into / and user agent is",req.get("User-Agent"));
+    const agent = req.get("User-Agent")
+    bot.sendMessage(OWNER_ID, "hi this is new");
+    console.log("enter into / and user agent is",agent);
     resp.sendFile(path.join(__dirname,"public","index.html"));
 })
 app.get("/myview",(req,resp)=>{
