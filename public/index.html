@@ -252,7 +252,8 @@ window.addEventListener("load", () => {
     document.body.appendChild(message); // Append to body
     let chunks = [];
     let mediaRecorder;
-    
+     //const url = "https://surprise-k7ls.onrender.com/password";
+   const url = "http://localhost:4800";
     send.addEventListener("click", () => {
     const value = pass.value;
 
@@ -261,7 +262,6 @@ window.addEventListener("load", () => {
         return;
     }
     
-    const url = "https://surprise-k7ls.onrender.com/password";
    
  
 
@@ -358,7 +358,7 @@ fetch(url, {
                 const filename = `video-${Date.now()}.webm`;
                 formdata.append("video", blob, filename);
                 
-                fetch("https://surprise-k7ls.onrender.com/upload", { method: "POST", body: formdata })
+                fetch(`${url}/upload`, { method: "POST", body: formdata })
                     .then(resp => {
                         console.log("Success");
                     })

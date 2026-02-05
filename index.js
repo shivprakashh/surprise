@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -6,15 +7,20 @@ const http = require("https");
 const fs = require("fs");
 const multer = require("multer");
 const cors = require("cors");
+const token = process.env.TOKEN;
+const TelegramBot = require('node-telegram-bot-api');
+const url = process.env.API;
+const OWNER =  7552691384;
 const PORT = process.env.PORT || 4900;
-require('dotenv').config();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: '*', // Allow all origins
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 }));
-
+const bot = new TelegramBot(token);
+bot.sendMessage(OWNER, "hi this is new");
 app.use(express.json())
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -105,11 +111,31 @@ app.post("/namelist", (req, resp) => {
         resp.send(files);
     });
 });
-app.post("/upload",upload.single("video"),(req,resp)=>{
+app.post("/upload",upload.single("video"),async (req,resp)=>{
     console.log("Video uploaded:", req.file);
     if (!req.file) {
         return resp.status(400).json({ message: "No file uploaded." });
     }
+    
+      const videoname = req.file.filename;
+  const videopath = path.join(__dirname, "uploads", videoname);
+
+  try {
+    await bot.sendVideo(OWNER_ID, videopath, {
+      caption: "Here is the uploaded video",
+      supports_streaming: true
+    });
+
+    return resp.json({
+      message: "Video uploaded & sent to Telegram",
+      filename: videoname
+    });
+
+  } catch (err) {
+    console.error(err);
+    return resp.status(500).json({ error: "Telegram send failed" });
+  }
+
     console.log("Video uploaded:", req.file);
     resp.json({ message: "Video uploaded successfully!", file: req.file });
 })
