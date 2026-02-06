@@ -20,6 +20,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type'],
 }));
 const bot = new TelegramBot(token);
+//this line need to added when run with render and not neet to add without render web hosting.
 bot.setWebHook(`${url}/bot${token}`);
 
 app.use(express.json())
